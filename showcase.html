@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tebak Emoji Coyyy</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      #emoji {
+        font-size: 5rem;
+      }
+      .glow {
+        animation: glowEffect 1.5s ease-in-out infinite alternate;
+      }
+      @keyframes glowEffect {
+        from {
+          text-shadow: 0 0 10px #28a745, 0 0 20px #28a745;
+        }
+        to {
+          text-shadow: 0 0 20px #28a745, 0 0 40px #28a745;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-light d-flex justify-content-center align-items-center vh-100"
+  >
+    <div class="card p-4 shadow" style="width: 350px">
+      <div id="emoji" class="text-center mb-4"></div>
+      <input
+        id="answer"
+        type="text"
+        class="form-control mb-3"
+        placeholder="Tebak jawabannya..."
+      />
+      <button id="submitBtn" class="btn btn-primary w-100 mb-3">Submit</button>
+      <p id="result" class="text-center fs-5"></p>
+      <p id="score" class="text-center fw-bold">Score: 0</p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="congratsModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+          <h1 class="text-success fw-bold glow">🎉 Congratulations! 🎉</h1>
+          <p class="fs-5 mt-3">
+            Wah kamu cocok buat masuk <strong>Harvard University</strong> nih!
+          </p>
+          <button
+            id="closeModalBtn"
+            type="button"
+            class="btn btn-primary mt-4"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game logic -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
