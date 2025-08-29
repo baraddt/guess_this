@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const questions = [
-    { emojis: "🐍", answer: "python" }, 
-    { emojis: "☕", answer: "java" }, 
-    { emojis: "🌐📄", answer: "html" }, 
-    { emojis: "🎨🖌️", answer: "css" }, 
-    { emojis: "⚡🧠", answer: "javascript" }, 
-    { emojis: "📦🐳", answer: "docker" }, 
-    { emojis: "🌍🐘", answer: "php" }, 
-    { emojis: "🦊🌐", answer: "firefox" }, 
-    { emojis: "🍃📘", answer: "mongodb" }, 
-    { emojis: "🔥🛠️", answer: "firebase" }, 
-    { emojis: "🔧🐧", answer: "linux" }, 
-    { emojis: "💎🚂", answer: "ruby on rails" }, 
-    { emojis: "📱🤖", answer: "android" }, 
+    { emojis: "🐍", answer: "python" },
+    { emojis: "☕", answer: "java" },
+    { emojis: "⚡", answer: "javascript" },
+    { emojis: "💎", answer: "ruby" },
+    { emojis: "🐘", answer: "php" },
+    { emojis: "🔣", answer: "code" },
+    { emojis: "🔁", answer: "loop" },
+    { emojis: "🧠", answer: "logic" },
+    { emojis: "🪲", answer: "bug" },
+    { emojis: "🔧", answer: "debug" },
+    { emojis: "🧪", answer: "test" },
+    { emojis: "📦", answer: "package" },
+    { emojis: "📂", answer: "folder" },
+    { emojis: "🧱", answer: "stack" },
+    { emojis: "🚀", answer: "deploy" },
   ];
 
   let currentIndex = 0;
@@ -105,18 +107,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const userAnswer = answerEl.value.trim().toLowerCase();
     const correctAnswer = questions[currentIndex].answer;
 
+    const feedback = `
+  Jawaban soal: <strong>${correctAnswer}</strong><br>
+  Jawaban anda: <strong>${userAnswer || "-"}</strong><br>
+  ${
+    userAnswer === correctAnswer
+      ? "✅ <span class='text-success'>Benar!</span>"
+      : "❌ <span class='text-danger'>Salah!</span>"
+  }`;
+
+    resultEl.innerHTML = feedback;
+
     if (userAnswer === correctAnswer) {
       score++;
-      resultEl.textContent = "Alahh siah ning betull";
       stopTimer();
       currentIndex++;
       if (currentIndex < questions.length) {
-        setTimeout(loadQuestion, 1000);
+        setTimeout(loadQuestion, 1500);
       } else {
         endGame();
       }
-    } else {
-      resultEl.textContent = "Salah euy, coba dei atuh";
     }
 
     scoreEl.textContent = `Score antum: ${score}`;
