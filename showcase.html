@@ -14,9 +14,11 @@
       #emoji {
         font-size: 5rem;
       }
+
       .glow {
         animation: glowEffect 1.5s ease-in-out infinite alternate;
       }
+
       @keyframes glowEffect {
         from {
           text-shadow: 0 0 10px #28a745, 0 0 20px #28a745;
@@ -24,6 +26,24 @@
         to {
           text-shadow: 0 0 20px #28a745, 0 0 40px #28a745;
         }
+      }
+
+      /* Tambahan buat timer */
+      .card {
+        position: relative;
+      }
+
+      #timer {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: white;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: #dc3545; /* warna merah bootstrap */
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -50,7 +70,8 @@
         <div class="modal-content text-center p-4">
           <h1 class="text-success fw-bold glow">🎉 Congratulations! 🎉</h1>
           <p class="fs-5 mt-3">
-            Wahhhhhhhhhhhhh kamu cocok buat masuk <strong>Harvard University</strong> nih!
+            Wahhhhhhhhhhhhh kamu cocok buat masuk
+            <strong>Harvard University</strong> nih!
           </p>
           <button
             id="closeModalBtn"

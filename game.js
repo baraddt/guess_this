@@ -33,17 +33,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("congratsModal")
   );
 
+  // Tambahkan elemen timer ke pojok kanan atas .card
   const timerEl = document.createElement("p");
-  timerEl.className = "text-center text-danger fw-bold";
-  document.querySelector(".card").insertBefore(timerEl, resultEl);
+  timerEl.id = "timer"; // styling-nya ditaruh di showcase.html
+  document.querySelector(".card").appendChild(timerEl);
 
   function startTimer() {
     timeLeft = TIME_LIMIT;
-    timerEl.textContent = `⏱️ Waktu: ${timeLeft} detik`;
+    timerEl.textContent = `⏱️ ${timeLeft}s`;
 
     timer = setInterval(() => {
       timeLeft--;
-      timerEl.textContent = `⏱️ Waktu: ${timeLeft} detik`;
+      timerEl.textContent = `⏱️ ${timeLeft}s`;
 
       if (timeLeft <= 0) {
         clearInterval(timer);
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   submitBtn.addEventListener("click", () => {
-    if (submitBtn.textContent === "Again") {
+    if (submitBtn.textContent === "Main Lagi") {
       resetGame();
       return;
     }
