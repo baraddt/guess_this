@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let timer;
   const TIME_LIMIT = 10;
   let timeLeft = TIME_LIMIT;
+  let userTries = [];
 
   const emojiEl = document.getElementById("emoji");
   const answerEl = document.getElementById("answer");
@@ -46,7 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (timeLeft <= 0) {
         clearInterval(timer);
-        resultEl.textContent = "⏱️ Waktu habis, soal di-skip!";
+        const correctAnswer = questions[currentIndex].answer;
+        const tries = userTries.length ? userTries.join(", ") : "-";
+
+        resultEl.innerHTML = `⏱️ Waktu habis! <br>
+        Jawaban Soal: ${correctAnswer}<br>
+        Jawaban Antum: ${tries}<br>
+        ❌ <span class="text-danger">Tidak benar</span>
+        `;
+
         currentIndex++;
         if (currentIndex < questions.length) {
           setTimeout(loadQuestion, 1000);
@@ -69,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadQuestion() {
+    userTries = [];
     answerEl.value = "";
     resultEl.textContent = "";
     emojiEl.textContent = questions[currentIndex].emojis;
@@ -91,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stopTimer();
     answerEl.disabled = true;
     submitBtn.textContent = "Main Lagi";
-    resultEl.textContent = `Game beres euy, nilai u ${score}`;
+    resultEl.textContent = `Game beres euy, nilai antum ${score}`;
 
     if (score === questions.length) {
       congratsModal.show();
@@ -99,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   submitBtn.addEventListener("click", () => {
-    if (submitBtn.textContent === "Main Lagi") {
+    if (submitBtn.textContent === "Again") {
       resetGame();
       return;
     }
@@ -107,26 +117,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const userAnswer = answerEl.value.trim().toLowerCase();
     const correctAnswer = questions[currentIndex].answer;
 
-    const feedback = `
-  Jawaban soal: <strong>${correctAnswer}</strong><br>
-  Jawaban anda: <strong>${userAnswer || "-"}</strong><br>
-  ${
-    userAnswer === correctAnswer
-      ? "✅ <span class='text-success'>Benar!</span>"
-      : "❌ <span class='text-danger'>Salah!</span>"
-  }`;
+    if (!userAnswer) return;
 
-    resultEl.innerHTML = feedback;
+    userTries.push(userAnswer);
+    answerEl.value = "";
 
     if (userAnswer === correctAnswer) {
       score++;
       stopTimer();
       currentIndex++;
+
+      resultEl.innerHTML = `
+        Jawaban soal: ${correctAnswer}<br>
+        Jawaban anda: ${userAnswer}<br>
+        ✅ <span class='text-success'>Benar!</span>
+      `;
+
       if (currentIndex < questions.length) {
         setTimeout(loadQuestion, 1500);
       } else {
         endGame();
       }
+    } else {
+      resultEl.innerHTML = `❌ Jawaban salah, coba lagi.`;
     }
 
     scoreEl.textContent = `Score antum: ${score}`;
