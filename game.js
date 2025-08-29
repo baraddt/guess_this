@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const correctAnswer = questions[currentIndex].answer;
         const tries = userTries.length ? userTries.join(", ") : "-";
 
-        resultEl.innerHTML = `⏱️ Waktu habis! <br>
+        resultEl.innerHTML = `
         Jawaban Soal: ${correctAnswer}<br>
         Jawaban Antum: ${tries}<br>
         ❌ <span class="text-danger">Tidak benar</span>
